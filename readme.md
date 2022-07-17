@@ -1,6 +1,12 @@
 # Three.js Starter
 Courtesy of Bruno Simon of https://threejs-journey.xyz/
 
+This is a starter project to explore base concepts of lighting and position in threejs. 
+
+## Tools: 
+https://cpetry.github.io/NormalMap-Online/
+https://www.textures.com/library
+
 ## Setup
 Download [Node.js](https://nodejs.org/en/download/).
 Run this followed commands:
