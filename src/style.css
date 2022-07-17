@@ -33,7 +33,7 @@ h1 {
 }
 
 section {
-    height: 200vh;
+    height: 0vh;
     display: grid;
     background-image: url('/static/textures/space.png');
 }

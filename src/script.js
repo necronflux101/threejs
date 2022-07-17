@@ -19,15 +19,17 @@ const sphereGeometry = new THREE.SphereBufferGeometry(0.75, 64, 64); //Defining 
 const textureLoader = new THREE.TextureLoader();
 const normalTexture = new textureLoader.load('/textures/planet_normal.png');
 const backgroundTexture = new textureLoader.load('/textures/space.png');
+// const grassTexture = new textureLoader.load('/textures/grass_flowy.jpg');
 
 scene.background = backgroundTexture;
 // Materials
 
-const material = new THREE.MeshStandardMaterial()
+const material = new THREE.MeshStandardMaterial();
 material.metalness = 0.7;
 material.roughness = 0.2;
 material.normalMap = normalTexture;
-material.color = new THREE.Color(0x9d7419)
+//material.map = grassTexture;
+material.color = new THREE.Color(0x9d7419);
 
 // Mesh
 const sphere = new THREE.Mesh(sphereGeometry, material)
@@ -41,7 +43,7 @@ pointLight.position.y = 3;
 pointLight.position.z = 4;
 
 
-const pointLight2 = new THREE.PointLight(0x9b0505, 2);
+const pointLight2 = new THREE.PointLight(0xfffff, 2);
 pointLight2.position.set(-1.78, 0.79, 1.33);
 pointLight2.intensity = 2.2;
 
@@ -151,26 +153,31 @@ document.addEventListener('mousemove', onDocumentMouseMove)
 
 let lastScrollTop = 0;
 const updateSphere = (event) => {
-    //sphere.position.y = window.scrollY * 0.001;
-    console.log('Event: ', event)
-    const st = window.pageYOffset || document.documentElement.scrollTop;
+    sphere.position.y = window.scrollY * 0.0009;
 
-    if (st > lastScrollTop) {
-        // downscroll code
-        sphere.position.z += 0.0001 * lastScrollTop;
-    } else
-    if(st === 0){
-        const originalZ = 0.14159999999999992;
-        sphere.position.z = originalZ;
-    } 
-    else
-    {
-        // upscroll code
-        sphere.position.z -= 0.0001 * lastScrollTop;
+    const st = window.pageYOffset || document.documentElement.scrollTop;
+    updatePositionZ(st, lastScrollTop);
+    console.log('Postion: ', st, sphere.position)
+    lastScrollTop = st <= 0 ? 0 : st;
+}
+
+function updatePositionZ(scrolltop, lastScrollTop) {
+    console.log('Lastscroll top: ', lastScrollTop)
+
+    if (scrolltop === 0) {
+        // Reset 
+        sphere.position.z = 0.14159999999999992;
+        return;
     }
 
-    console.log('Postion: ',st, sphere.position)
-    lastScrollTop = st <= 0 ? 0 : st;
+    if (scrolltop < lastScrollTop) {
+        // upscroll 
+        sphere.position.z -= 0.0001 * lastScrollTop;
+        return;
+    }
+
+    // DownScroll
+    sphere.position.z += 0.0001 * lastScrollTop;
 }
 
 window.addEventListener('scroll', updateSphere);
