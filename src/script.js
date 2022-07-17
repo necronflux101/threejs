@@ -18,7 +18,9 @@ const sphereGeometry = new THREE.SphereBufferGeometry(0.75, 64, 64); //Defining 
 // Loading
 const textureLoader = new THREE.TextureLoader();
 const normalTexture = new textureLoader.load('/textures/planet_normal.png');
+const backgroundTexture = new textureLoader.load('/textures/space.png');
 
+scene.background = backgroundTexture;
 // Materials
 
 const material = new THREE.MeshStandardMaterial()

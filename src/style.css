@@ -5,7 +5,7 @@
 
 html,
 body {
-    height: 200vh;
+    height: 150vh;
     overflow-x: hidden;
     font-family: "Poppins";
     background: rgb(0, 0, 0);
@@ -32,7 +32,8 @@ h1 {
     font-family: sans-serif;
 }
 
-/* section {
-    height: 100vh;
+section {
+    height: 200vh;
     display: grid;
-} */
+    background-image: url('/static/textures/space.png');
+}
